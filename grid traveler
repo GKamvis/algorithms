@@ -1,0 +1,84 @@
+/* 
+Neçə fərqli yolla n*m ölçülü griddə ən üst soldan  ən aşağı sağa gedə bilərik?
+
+     1   2   3
+1  |--- --- ---|       
+2  |--- --- ---|
+3  |--- --- ---|
+
+Əgər n və ya m hər hansı biri 0 olsa bir başa cavab 0 olacaq,çünki mövcud olmayacaq.
+Əgər n və ya m hər ikisi  1 olsa bir başa cavab 1 olacaq, çünki heçyerə getməyəcək.
+
+Məsələni həll etmək üçün resursiv və ya normal şəkildə funsksiyalar yaza bilərik.
+Qısa və anlaşıqlı olan rekursiv  yazilandır.
+
+bu məsələni rekursiv funskiya kimi yazsaq 2  cür yanaşa bilərik:
+1) bütün nodlara baxsın və hesablamaya daxil etsin -->> bu halda Time Complexity (2^(m+n)) olur vizualaşdırıb hündürlüyünə baxmaq kifayətdur
+ Space Complexity həmçinin rekursiyanın dərinliyi qədərdir yəni O(m+n)
+2) getdiyi nodları yadda saxlasın  və hesablamada yenidən hesablamasın.-->>  Time ComplexityO(m*n) olur çünki istənilən halda node bir dəfə hesablanacaq 
+Space Complexity stabil qalır yəni dərinlikdən aslıdır O(m+n)
+2-ci halda memorization koda daxil olur.Sadə rekursiyaya hesablanmıs nodları Mapdə saxlayır lazim.
+
+ mapda olan 1,2 ilə 2,1 arasında çoxda fərq yoxdur yəni ikisidə istifadə olunduqda toplanacaq , ona görədə  key yaradıb orada m və n i birləşdirib map-ə yerləşdiririk.
+
+
+*/
+//---------------------- 1-ci həll -----------
+void main() {
+  dynamic? gridTravler(m , n ){
+    if(n == 1 && m == 1) return 1;
+    if(n ==0 || m == 0) return 0;
+    return gridTravler(m-1, n  )+ gridTravler(m ,n-1 );
+  }
+  print(gridTravler(10 , 10 ));
+}
+
+
+//--------------------  2-ci həll--------------- 
+void main() {
+
+  dynamic? gridTravler(m , n , Map<String , int> memo){
+   // var key = m.toString() + "," + n.toString();
+     var key = '$m,$n';
+    if(n == 1 && m == 1) return 1;
+    if(n ==0 || m == 0) return 0;
+    memo[key] = gridTravler(m-1, n , memo )+ gridTravler(m ,n-1 , memo);
+   // print(key);
+    return memo[key];
+      }
+  Map<String , int> memo = {};
+  print(gridTravler(10 , 10 , memo ));
+}
+
+
+
+
+//        -----------------------          rekursiya olmadan 2d array ilə həll 
+
+// Time Complexity O(m*n)
+// Spcae Complexity O(m*n) <<-- (m + 1) x (n + 1)
+
+int gridTraveler(int m, int n) {
+
+  List<List<int>> table = List.generate(m + 1, (i) => List.filled(n + 1, 0));
+
+  table[1][1] = 1;
+
+  for (int i = 0; i <= m; i++) {
+    for (int j = 0; j <= n; j++) {
+      int current = table[i][j];
+      if (j + 1 <= n) table[i][j + 1] += current; // Sağdakı cell-ə dəyəri əlavə edir
+      if (i + 1 <= m) table[i + 1][j] += current; // Aşağıdakı cell-ə dəyəri əlavə edir
+    }
+  }
+
+  return table[m][n]; 
+}
+
+void main() {
+  print(gridTraveler(10, 10)); 
+}
+
+
+
+
