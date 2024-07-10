@@ -1,0 +1,24 @@
+import 'dart:math';
+
+class MetaBinarySearch {
+  int? search(List<int> nums, target) {
+    int n = nums.length;
+    var lg = log(n - 1) ~/ log(2) + 1;
+    int pos = 0;
+    for (int i = lg; i >= 0; i--) {
+      if (nums[pos] == target) return pos;
+
+      int newPos = pos | (1 << i);
+
+      if ((newPos < n) && (nums[newPos] <= target)) pos = newPos;
+    }
+    return nums[pos] == target ? pos : -1;
+  }
+}
+
+void main() {
+  MetaBinarySearch metaSearch = MetaBinarySearch();
+  List<int> nums = [-2, 10, 100, 250, 32315];
+  int target = 250;
+  print(metaSearch.search(nums, target));
+}
