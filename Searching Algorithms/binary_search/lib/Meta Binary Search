@@ -1,3 +1,35 @@
+/*
+bu alqoritmin time complexitysi - O(log n) , space complexitysi əsasən O(1) olur çünki ekstra yadaş istifadə etmir 
+  int newPos = pos | (1 << i);  << shift operatorudur yəni 1 dəyərini  -i vahid sağa sürüşdürəcək.
+yəni i = 3 olsa 00000 << 01000
+
+ Bitwise OR |           00000 | 01000 = 01000
+  nums = [-1, 1, 10, 20, 21];
+  target = 20;
+bu nümunədə 20 axtarırlır  output 3 olmalıdır.
+alqoritm başladı-->
+uzunluq  5 olacaq, n = 5  --> lg = 3   (log2(n-1) + 1) --> pos = 0 -->
+dövr başladı --> i = 3 
+nums[0] target -ə barabər deyil davam edirik --> newPos = 0 | (1 << 3) newPos = 8 -->
+newPos< n  yanlışdır --> dövr bittdi
+dövr başladı
+i = 2 
+nums[0] target -ə barabər deyil davam edirik --> newPos = 0 | (1 << 2) newPos = 4 -->
+newPos< n doğrududur ancaq nums[newPos] <= target) yanlışdır 
+dövr başladı
+i = 1
+nums[0] target -ə barabər deyil davam edirik --> newPos = 0 | (1 << 1) newPos = 2 -->
+ newPos< n doğrududur ,  nums[newPos] <= target)  doğrudur. --> pos = 2
+dövr başladı
+i = 0
+nums[2] target -ə barabər deyil davam edirik --> newPos = 2 | (1 << 0) newPos = 3 -->
+ newPos< n doğrududur ,  nums[newPos] <= target)  doğrudur. --> pos = 3
+
+dövr bitdi 
+pos = 3 tapildi.
+
+
+*/
 import 'dart:math';
 
 class MetaBinarySearch {
@@ -8,14 +40,13 @@ class MetaBinarySearch {
     for (int i = lg; i >= 0; i--) {
       if (nums[pos] == target) return pos;
 
-      int newPos = pos | (1 << i);
+   int newPos = pos | (1 << i);
 
       if ((newPos < n) && (nums[newPos] <= target)) pos = newPos;
     }
     return nums[pos] == target ? pos : -1;
   }
 }
-
 void main() {
   MetaBinarySearch metaSearch = MetaBinarySearch();
   List<int> nums = [-2, 10, 100, 250, 32315];
