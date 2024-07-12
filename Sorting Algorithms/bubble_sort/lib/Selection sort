@@ -1,0 +1,33 @@
+/* 
+time complexity O(N^2)
+Space complexity O(1)
+Texniki olaraq selection sort alqoritmi N dəfə swap edə bilər buna görədə  o(N) dəfədən artıq olmayacaq Space complexity
+İşləməsi ən (kiçik / böyük ) rəqəmi 2 ci dövr ilə tapir və i indeksli element ilə yerlərini dəyişdirir.
+*/
+
+class SelectionSort {
+  List<int>? sort(List<int> list) {
+    int n = list.length;
+    int minIndex = 0;
+
+    for (int i = 0; i < n - 1; i++) {
+      minIndex = i;
+
+      for (int j = i + 1; j < n; j++) {
+        if (list[j] < list[minIndex]) minIndex = j;
+      }
+      if (minIndex != i) {
+        int temp = list[minIndex];
+        list[minIndex] = list[i];
+        list[i] = temp;
+      }
+    }
+    return list;
+  }
+}
+
+void main() {
+  SelectionSort SSort = SelectionSort();
+  List<int> list = [1, 4, 2, 5, -13, -35, -65, 12, 1, -20];
+  print(SSort.sort(list));
+}
