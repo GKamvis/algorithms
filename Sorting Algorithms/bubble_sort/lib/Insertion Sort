@@ -1,0 +1,58 @@
+/*
+Insertion Sort
+Time complexity O(N^2) ən pis halda bütün elementləri yoxlaya bilər
+Amma ən yaxşı halda O(N) ola bilər. Ortalamada O(N^2) olur
+Space complexity O(1)
+
+Insertion sort o halda istifadə edilsə effektiv olarki demək olarki List sıralanib bir qismi qalır.
+
+Algorithmic Paradigm - inkremental  approach( artan yanaşma yəni addım-addım  işləyən yanaşmadır)  (Paradigm = a pattern or model.)
+Müxtəlif algoritmik paradigmaları-
+1)Divide and Conquer - problmei daha kiçik hisılərə bölür  və bu alt problemləri həll edir.
+məsələn quick sort merge sort
+2)Dynamic Programming Problemi bir növ rekursiyaya(rekursiya şərt deyil) bir sözlə təkrarlanan problemlərə bölüb və onları xatırlayaraq effektivliyi artirmaq üçün nəzərdə tutlmuş approach(yaxınlaşma)  
+məsələn Fibonacci əddədi
+3)Greedy - ən yaxşı yolu seçmə 
+4)BackTracking - proqrama əsasən bir ağac yaratsaq və uyğun olmayan həllrəi geri çəkməklə  yeni həll yaratsaq bu (geri izləmə )  backTracking approach(yaxınlaşması) olar.
+5)Brute Force - bu yaxınlaşma bütün münkün variantları axtrmaqır.
+
+
+
+Alqoritim belə işləyir--
+ilk dövr başlayır və key dəyişəni i indeksli elementə bərabər olur.
+sonra ikinci dövr üçün : (j = i - 1)(i dəyəri 1 dən başladığı üçün 0 indeksli elementə bərabərdir list[j]) 
+While dövrü onun üçündürki  biz hər dəyəri soldakı dəyər ilə yoxlayiriq (list[j] > key) olduqda  (list[j + 1] = list[j]) şərti icra olmalıdırki kiçik dəyəri sola köçürə bilsin
+Və bununlada yanaşı  (j >= 0) şərtidə istifadə olunmalıdırkı təkcə solundaki ilə yox  hansı i indeksindən başlamağından aslı olmayaraq  j = 0 indeksinə qədər getsin və sıralasımn
+Yəni [ 2 , 3, 1]      [2 , 3, 1 ] 
+                 ==>  [2 , 1, 3 ]    
+                      [1 , 2 , 3]     kimi sıralasın (iki iterasiyadan sonra sıralanmış olcaq.)
+
+j dəyəri  ona görə azalırkı(j--)  while dövrü ən sola geedə bilsin.
+
+
+
+
+
+*/
+
+class InsertionSort {
+  List<int>? sort(List<int> list) {
+    for (int i = 1; i < list.length; i++) {
+      int key = list[i];
+      int j = i - 1;
+      while (j >= 0 && list[j] > key) {
+        list[j + 1] = list[j];
+        j--;
+      }
+      list[j + 1] = key;
+      print(list);
+    }
+    return list;
+  }
+}
+
+void main() {
+  InsertionSort ISort = InsertionSort();
+  List<int> list = [2, 3, 1];
+  print(ISort.sort(list));
+}
