@@ -1,0 +1,29 @@
+/*
+Time complexity O(N) - ən yaxşı halda O(1) ola bilər 
+Space complexity O(1)
+Aşağıdakı iki haldada eyni effektivliyə malikdir. 
+*/
+class LinearSearch {
+  int? search(List<int> list, target) {
+    int n = list.length;
+    // for (int i = 0; i < n; i++) {
+    //   if (list[i] == target) return i;
+    // }
+    int l = 0;
+    int r = n - 1;
+    while (l <= r) {
+      if (list[l] == target) return l;
+      l++;
+      if (list[r] == target) return r;
+      r--;
+    }
+    return -1;
+  }
+}
+
+void main() {
+  LinearSearch LSearch = LinearSearch();
+  List<int> list = [1, 5, 23, 2, 4];
+  int target = 2;
+  print(LSearch.search(list, target));
+}
