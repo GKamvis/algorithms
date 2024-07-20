@@ -1,0 +1,70 @@
+/*
+Time complexity O(nLogN) ən pis halda O(n^2) ola bilər buda belə münkün ola bilərki hər dəfə seçilən pivot ən böyük və ya ən kiçik olsun.(Ən böyük və ya ən kiçik olanda array blanaslı şəkildə bölünə bilmir )
+Space Complexity O(logn) olacaq bu bir rekursiv alqoritimdir və digər rekursiv alqoritmlərdəd olduğu kimi dərinliyindən aslıdır,Hər bir rekursiya işlədikdə yaddaş tələb olunacaq.
+Ən pis halda Space Complexity O(N) ola bilər.
+
+Aşağıda sıra ilə ən efektivdən ən yavaşa doğu yazilib.
+O(1): Constant complexity. -ən yaxşı
+O(logn): Logarithmic complexity. - yaxşı 
+O(n): Linear complexity. - normal
+O(nlogn): Loglinear complexity. -çoxda pis deyil
+O(n^x): Polynomial complexity. - pis 
+O(X^n): Exponential time. -dahada pis 
+O(n!): Factorial complexity.  - bərbad 
+
+
+Alqoritm belə işləyirki birinci sağdakı elemeti pivot seçir ona əsaən müaqisəyə başlayır.Seçilən pivotdan balacaları  özündən sola böyükləri  isə özündən sağa yığır.
+yəni [1 , 4, 5, 12 ,14, 11 , 6] listini belə sıralıyır [1 , 4, 5, 6 , 12 , 14 , 11](burada pivotun yerini təyin etdik 3 cü indeksi element )  partition methodunun işi tam olaraq budur. 
+6 elemetinin yeri müyəyən oldu artiq ona baxmırıq
+Sonra isə quickSort methodu işləyir bu halda isə 
+iki dəfə alqoritm rekursiv şəklildə işləyir 
+1) ƏN SOLDAN PİVOTA QƏDƏR -[1 , 4, 5 ]   
+2) PIVOTDAN ƏN SAĞA QƏDƏR -[12 , 14 , 11] 
+                           [12 , 11 , 14] buradada pivotun yerini tapdıq.
+                           [12 , 14]
+
+                           nəticədə ilk pivot bəlli idi 6(3 cü indekdə )
+                           [1 , 4 , 5 ,6,11 , 12 , 14 ] olaraq listi sıraladıq.
+
+Bu aloritmdədə yanaşma (Divide and Conquer)-dir.
+
+Pivot seçimini right indeksindəki element olaraq  təyin etmişəm amma təsadüfi pivot seçimidə istifadə edilə bilər.
+*/
+
+class QuickSort {
+  void quickSort(List<int> numbers, int left, int right) {
+    if (left < right) {
+      int pivotIndex = partition(numbers, left, right);
+      quickSort(numbers, left, pivotIndex - 1); // ƏN SOLDAN PİVOTA QƏDƏR
+      quickSort(numbers, pivotIndex + 1, right); // PIVOTDAN ƏN SAĞA QƏDƏR
+    }
+  }
+
+  int partition(List<int> numbers, int left, int right) {
+    int i = left - 1;
+    int pivot = numbers[right];
+    for (int j = left; j < right; j++) {
+      if (numbers[j] <= pivot) {
+        i++;
+        swap(numbers, i, j);
+      }
+    }
+    swap(numbers, i + 1, right);
+    return i + 1;
+  }
+
+  void swap(List<int> numbers, int i, int j) {
+    int temp = numbers[i];
+    numbers[i] = numbers[j];
+    numbers[j] = temp;
+  }
+}
+
+void main() {
+  QuickSort QSort = QuickSort();
+  List<int> numbers = [10, 7, 8, 9, 1, 5, -1, 4, 5, 2, 2323, 5];
+  print('NORMAL LİST: $numbers');
+  QSort.quickSort(numbers, 0, numbers.length - 1);
+  print(
+      'SIRALANMIŞ LİST: $numbers'); //[-1, 1, 2, 4, 5, 5, 5, 7, 8, 9, 10, 2323]
+}
