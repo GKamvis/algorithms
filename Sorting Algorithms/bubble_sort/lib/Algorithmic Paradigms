@@ -1,9 +1,9 @@
 Algorithmic Paradigm - inkremental  approach( artan yanaşma yəni addım-addım  işləyən yanaşmadır)  (Paradigm = a pattern or model.)
 Müxtəlif algoritmik paradigmaları-
-1)Divide and Conquer - problmei daha kiçik hisılərə bölür  və bu alt problemləri həll edir.
-məsələn quick sort merge sort
+1)Divide and Conquer - problemi daha kiçik hissələrə bölür  və bu alt problemləri həll edir.
+məsələn quick sort, merge sort
 2)Dynamic Programming Problemi bir növ rekursiyaya(rekursiya şərt deyil) bir sözlə təkrarlanan problemlərə bölüb və onları xatırlayaraq effektivliyi artirmaq üçün nəzərdə tutlmuş approach(yaxınlaşma)  
 məsələn Fibonacci əddədi
 3)Greedy - ən yaxşı yolu seçmə 
 4)BackTracking - proqrama əsasən bir ağac yaratsaq və uyğun olmayan həlləri geri çəkməklə  yeni həll yaratsaq bu (geri izləmə )  backTracking approach(yaxınlaşması) olar.
-5)Brute Force - bu yaxınlaşma bütün münkün variantları axtrmaqır.
+5)Brute Force - bu yaxınlaşma bütün münkün variantları axtarmaqır.
