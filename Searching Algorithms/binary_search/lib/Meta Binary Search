@@ -3,7 +3,10 @@ bu alqoritmin time complexitysi - O(log n) , space complexitysi əsasən O(1) ol
   int newPos = pos | (1 << i);  << shift operatorudur yəni 1 dəyərini  -i vahid sağa sürüşdürəcək.
 yəni i = 3 olsa 00000 << 01000
 
- Bitwise OR |           00000 | 01000 = 01000
+ Bitwise OR |    
+
+  00000 | 01000 = 01000
+
   nums = [-1, 1, 10, 20, 21];
   target = 20;
 bu nümunədə 20 axtarırlır  output 3 olmalıdır.
