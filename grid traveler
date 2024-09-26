@@ -1,5 +1,5 @@
 /* 
-Neçə fərqli yolla n*m ölçülü griddə ən üst soldan  ən aşağı sağa gedə bilərik?
+Neçə fərqli yolla n*m ölçülü grid-də ən üst soldan  ən aşağı sağa gedə bilərik?
 
      1   2   3
 1  |--- --- ---|       
